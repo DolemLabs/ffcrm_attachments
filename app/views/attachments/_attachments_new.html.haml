@@ -1,3 +1,5 @@
+= filepicker_js_include_tag
+
 - attach_limit_size = Setting.attachment_size || 2.megabytes
 - edit = !f.object.new_record?
 - collapsed = session[:entity_extra].nil?
@@ -14,7 +16,9 @@
             .attach_div
               - new_record = t.object.new_record?
 
-              = t.file_field 'attachment', id: 'attach'
+              /= t.file_field 'attachment', id: 'attach'
+              
+              = t.filepicker_field :attachment, button_class: "btn btn-gray", id: "attach"
 
               .current_file_name= t.object.try(:attachment_file_name)
 

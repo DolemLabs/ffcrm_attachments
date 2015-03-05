@@ -21,3 +21,5 @@ group :development do
   gem 'byebug', platform: 'ruby_20'
   gem 'debugger', platform: 'ruby_19'
 end
+
+gem 'filepicker-rails'
