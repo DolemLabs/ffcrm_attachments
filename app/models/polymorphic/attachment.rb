@@ -9,6 +9,8 @@ class Attachment < ActiveRecord::Base
   ATTACHMENT_FORMATS = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg']
   STYLES = { medium: "150x150>" }
 
+  acts_as_taggable_on :tags
+
   belongs_to :user
   belongs_to :entity, :polymorphic => true
 
