@@ -16,8 +16,6 @@
             .attach_div
               - new_record = t.object.new_record?
 
-              /= t.file_field 'attachment', id: 'attach'
-              
               = t.filepicker_field :attachment, button_class: "btn btn-gray", id: "attach"
 
               .current_file_name= t.object.try(:attachment_file_name)
