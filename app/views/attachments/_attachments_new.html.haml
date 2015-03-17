@@ -16,7 +16,12 @@
             .attach_div
               - new_record = t.object.new_record?
 
-              = t.filepicker_field :attachment, button_class: "btn btn-gray", id: "attach"
+              = t.filepicker_field :attachment, button_class: "btn btn-gray", id: "attach", onchange: 'onPhotoUpload(event)'
+
+              /= t.hidden_field :filepicker_url
+              /= t.hidden_field :attachment_file_size
+              = t.hidden_field :attachment_file_name
+              /= t.hidden_field :attachment_content_type
 
               .current_file_name= t.object.try(:attachment_file_name)
 

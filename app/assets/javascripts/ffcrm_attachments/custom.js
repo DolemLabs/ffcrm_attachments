@@ -14,36 +14,38 @@ $(document).on("click", "#main form[class^=new_] input[type=submit], #main form[
   return false;
 });
 
-$(document).on('change', "#attach", function (){
-  var parent_div = $(this).closest(".attach_div");
-  var attach_limit = $(parent_div.closest('table')[0]).attr("attach_limit");
-  var attach_limit_size = file_size_in_bytes(attach_limit);
-  var file_type = this.files[0].type;
-
-  if((file_type == "") || (this.files[0].size > attach_limit_size)) {
-    error_msg = (file_type == "") ? "Invalid file type" : "File size is too long.";
-    parent_div.find('.current_file_name').addClass('error').html(error_msg);
-    $(this).val('');
-    parent_div.find(".file_size").html('');
-    parent_div.find(".remove_link").hide();
-  } else {
-    var last_file_input = $("#entity_extra").find('input').last()[0].files;
-
-    // append file input
-    append_file_input(last_file_input);
-
-    // display attachment-name
-    var file_name = this.files[0].name;
-    parent_div.find('.current_file_name').removeClass("error").html(file_name);
-
-    // display attachment-size
-    var file_size = get_file_size(this.files[0]);
-    parent_div.find(".file_size").html(file_size);
-
-    // display remove attachment link
-    parent_div.find(".remove_link").show();
-  }
-});
+//$(document).on('change', "#attach", function (){
+//  var parent_div = $(this).closest(".attach_div");
+//  var attach_limit = $(parent_div.closest('table')[0]).attr("attach_limit");
+//  var attach_limit_size = file_size_in_bytes(attach_limit);
+//  var file_type = this.files[0].type;
+//
+//  console.log(this);
+//
+//  if((file_type == "") || (this.files[0].size > attach_limit_size)) {
+//    error_msg = (file_type == "") ? "Invalid file type" : "File size is too long.";
+//    parent_div.find('.current_file_name').addClass('error').html(error_msg);
+//    $(this).val('');
+//    parent_div.find(".file_size").html('');
+//    parent_div.find(".remove_link").hide();
+//  } else {
+//    var last_file_input = $("#entity_extra").find('input').last()[0].files;
+//
+//    // append file input
+//    append_file_input(last_file_input);
+//
+//    // display attachment-name
+//    var file_name = this.files[0].name;
+//    parent_div.find('.current_file_name').removeClass("error").html(file_name);
+//
+//    // display attachment-size
+//    var file_size = get_file_size(this.files[0]);
+//    parent_div.find(".file_size").html(file_size);
+//
+//    // display remove attachment link
+//    parent_div.find(".remove_link").show();
+//  }
+//});
 
 $(document).on('click', ".remove_link", function(){
   // new attachment
@@ -119,4 +121,10 @@ function append_file_input(last_file_input) {
     var next_attach_input = get_file_input(set_attr_name);
     $(".next_attachment").append(next_attach_input);
   }
+}
+
+function onPhotoUpload(event) {
+  $('.attach_div').last().find('input[type="hidden"]').first().val(event.fpfile.filename);
+  $('.attach_div').last().find('div[class="current_file_name"]').first().text(event.fpfile.filename);
+  $('.attach_div').last().find('div[class="file_size"]').first().text(get_file_size(event.fpfile));
 }
