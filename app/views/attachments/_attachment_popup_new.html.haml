@@ -1,0 +1,29 @@
+= filepicker_js_include_tag
+
+%div{:class => "modal-dialog"}
+  %div{:class => "modal-content"}
+    %div{:class => "modal-header"}
+      %button#close_button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"}
+        &times;
+      %h4{:class => "modal-title"}
+        New Media Gallery
+    %div{:class => "modal-body row"}
+      = simple_form_for(@account, :url => '/attachments/create', :html => one_submit_only, :remote => true) do |f|
+        = f.simple_fields_for :attachments, @attach do |t|
+          %div{:class => "col-md-5 img-modal"}
+            = attachment_preview(@attach)
+          %div{:class => "col-md-7"}
+            %div{:class => "form-group"}
+              = t.filepicker_field :attachment, id: "attach", :class => "btn btn-gray", :services => "BOX,COMPUTER,DROPBOX,GOOGLE_DRIVE,FLICKR,EVERNOTE,GMAIL,INSTAGRAM,URL,PICASA,FTP", onchange: 'onPhotoUpload(event)'
+            %div{:class => "form-group"}
+              %label
+                Name
+              = t.text_field :attachment_file_name, :disabled => 'disabled'
+              = t.hidden_field :account_id, :value => @account.id
+            %div{:class => "form-group"}
+              = render :partial => "/attachments/tags", :locals => {:f => t, :span => 3}
+            %div{:class => "pull-right"}
+              %button{:class => "btn btn-danger", :type => "button", "data-dismiss" => "modal"}
+                Cancel
+              %button{:class => "btn btn-primary", :type => "submit"}
+                Save changes

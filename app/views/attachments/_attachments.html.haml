@@ -1,14 +1,46 @@
 - collapsed = session[:entity_attachments].nil?
 %br/
-#attachments
-  = subtitle :entity_attachments, collapsed, t(:extra_doc) + " (#{entity.attachments.count})"
-  .attachments
-    #entity_attachments{ hidden_if(collapsed) }
-      %table
-        %tr
-          %td
-            - if entity.attachments.present?
-              - entity.attachments.each do |attach|
-                .attach_block
-                  = link_to attachment_preview(attach), download_attachment_path(attach), {title: attach.attachment_file_name}
-                  .file_name= file_name(attach)
+%div{:class => "row"}
+  %div{:class => "col-sm-12"}
+    %section{:class => "panel"}
+      %header{:class => "panel-heading"}
+        Media Manager
+        %span{:class=>"tools pull-right"}
+          =link_to "", "javascript:;", :class => "fa fa-chevron-down"
+          =link_to "", "javascript:;", :class => "fa fa-cog"
+          =link_to "", "javascript:;", :class => "fa fa-times"
+      %div{:class => "panel-body"}
+        %ul#filters{:class => "media-filter"}
+          %li 
+            = link_to "All", "#", "data-filter" => "*"
+          %li 
+            = link_to "Images", "#", "data-filter" => ".images"
+          %li 
+            = link_to "Audio", "#", "data-filter" => ".audio"
+          %li 
+            = link_to "Video", "#", "data-filter" => ".video"
+          %li 
+            = link_to "Documents", "#", "data-filter" => ".documents"
+        %div{:class => "btn-group pull-right"}
+          %button{:type => "button", :class => "btn btn-white btn-sm"}
+            %i{:class => "fa fa-check-square-o"}
+              Select all
+          %button#add_new{:type => "button", :class => "btn btn-white btn-sm"}
+            %i{:class => "fa fa-folder-open"}
+              Add New
+          %button{:type => "button", :class => "btn btn-white btn-sm"}
+            %i{:class => "fa fa-trash-o"}
+              Delete
+        = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @account.id.to_s + ");") do
+          %i{:class => "fa fa-upload"}
+            Upload New File
+            
+        %div#gallery{:class => "media-gal"}
+          - if entity.attachments.present?
+            - entity.attachments.each do |attach|
+              = render :partial => '/attachments/attachment', :locals => {:attach => attach}
+                  
+        %div{:class => "col-md-12 text-center clearfix"}
+
+        %div#myModal{:class => "modal fade", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+        

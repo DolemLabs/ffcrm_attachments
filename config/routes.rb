@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       get :download
       put :remove
+      post :popup
     end
   end
 end

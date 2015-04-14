@@ -14,6 +14,7 @@ $(document).on("click", "#main form[class^=new_] input[type=submit], #main form[
   return false;
 });
 
+
 //$(document).on('change', "#attach", function (){
 //  var parent_div = $(this).closest(".attach_div");
 //  var attach_limit = $(parent_div.closest('table')[0]).attr("attach_limit");
@@ -124,7 +125,45 @@ function append_file_input(last_file_input) {
 }
 
 function onPhotoUpload(event) {
-  $('.attach_div').last().find('input[type="hidden"]').first().val(event.fpfile.filename);
-  $('.attach_div').last().find('div[class="current_file_name"]').first().text(event.fpfile.filename);
-  $('.attach_div').last().find('div[class="file_size"]').first().text(get_file_size(event.fpfile));
+  $('#account_attachments_attributes_0_attachment_file_name').val(event.fpfile.filename);
+}
+
+function loadPopup(attach_id) {
+  url = "/attachments/" + attach_id + "/popup";
+  data = {id: attach_id};
+  
+  var jqxhr = $.post( url, function(data) {
+      // success
+      $("#myModal").html(data.responseText);
+    })
+    .done(function() {
+      // second success
+    })
+    .always(function(data) {
+      // finished
+    });
+}
+
+function loadPopupNew(account_id) {
+  url = "/attachments/new?account_id=" + account_id;
+  
+  var jqxhr = $.get( url, function(data) {
+      // success
+      $("#myModal").html(data.responseText);
+    });
+}
+
+function deleteFile(attachment_id) {
+  url = "/attachments/" + attachment_id + "/remove";
+  data = { id: attachment_id, _method: 'put' };
+  
+  var request = $.post( url, data);
+  request.done(function(data) {
+      // success
+      // $("#myModal").html(data.responseText);
+      $("#attachment_" + attachment_id).fadeOut(400, function(){
+        $(this).remove();
+      });
+      $("#close_button").click();
+    });
 }

@@ -1,0 +1,24 @@
+%div{:class => "modal-dialog"}
+  %div{:class => "modal-content"}
+    %div{:class => "modal-header"}
+      %button#close_button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"}
+        &times;
+      %h4{:class => "modal-title"}
+        Edit Media Gallery
+    %div{:class => "modal-body row"}
+      = simple_form_for(@account, :url => {:controller => :attachments, :action => 'update'}, :html => one_submit_only, :remote => true) do |f|
+        = f.simple_fields_for :attachments, @account.attachments.where("id = ?", @attach.id).first do |t|
+          %div{:class => "col-md-5 img-modal"}
+            = attachment_preview(@attach)
+          %div{:class => "col-md-7"}
+            %div{:class => "form-group"}
+              %label
+                Name
+              = t.text_field :name, {:value => file_name(@attach), :disabled => 'true'}
+            %div{:class => "form-group"}
+              = render :partial => "/attachments/tags", :locals => {:f => t, :span => 3}
+            %div{:class => "pull-right"}
+              %button{:class => "btn btn-danger", :type => "button", :onclick => "deleteFile(" + @attach.id.to_s + ")"}
+                Delete
+              %button{:class => "btn btn-primary", :type => "submit"}
+                Save changes

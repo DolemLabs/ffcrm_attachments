@@ -1,0 +1,4 @@
+%div{:class => 'images item isotope-item', :id => "attachment_#{attach.id}"}
+  = link_to(attachment_preview(attach), "#myModal", "data-toggle" => "modal", :onclick => "loadPopup(" + attach.id.to_s + ");")
+  %p
+    = file_name(attach)
