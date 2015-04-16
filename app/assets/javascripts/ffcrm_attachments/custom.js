@@ -126,6 +126,7 @@ function append_file_input(last_file_input) {
 
 function onPhotoUpload(event) {
   $('#account_attachments_attributes_0_attachment_file_name').val(event.fpfile.filename);
+  $('#name').val(event.fpfile.filename);
 }
 
 function loadPopup(attach_id) {

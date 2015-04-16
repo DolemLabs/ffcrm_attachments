@@ -21,17 +21,17 @@
             = link_to "Video", "#", "data-filter" => ".video"
           %li 
             = link_to "Documents", "#", "data-filter" => ".documents"
-        %div{:class => "btn-group pull-right"}
-          %button{:type => "button", :class => "btn btn-white btn-sm"}
-            %i{:class => "fa fa-check-square-o"}
-              Select all
-          %button#add_new{:type => "button", :class => "btn btn-white btn-sm"}
-            %i{:class => "fa fa-folder-open"}
-              Add New
-          %button{:type => "button", :class => "btn btn-white btn-sm"}
-            %i{:class => "fa fa-trash-o"}
-              Delete
-        = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @account.id.to_s + ");") do
+        /%div{:class => "btn-group pull-right"}
+        /  %button{:type => "button", :class => "btn btn-white btn-sm"}
+        /    %i{:class => "fa fa-check-square-o"}
+        /      Select all
+        /  %button#add_new{:type => "button", :class => "btn btn-white btn-sm"}
+        /    %i{:class => "fa fa-folder-open"}
+        /      Add New
+        /  %button{:type => "button", :class => "btn btn-white btn-sm"}
+        /    %i{:class => "fa fa-trash-o"}
+        /      Delete
+        = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", :style => "color: #0033cc;", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @account.id.to_s + ");") do
           %i{:class => "fa fa-upload"}
             Upload New File
             

@@ -18,7 +18,8 @@
             %div{:class => "form-group"}
               %label
                 Name
-              = t.text_field :attachment_file_name, :disabled => 'disabled'
+              = text_field_tag :name, "", :disabled => 'disabled'
+              = t.hidden_field :attachment_file_name
               = t.hidden_field :account_id, :value => @account.id
             %div{:class => "form-group"}
               = render :partial => "/attachments/tags", :locals => {:f => t, :span => 3}
