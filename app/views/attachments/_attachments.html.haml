@@ -5,32 +5,11 @@
     %section{:class => "panel"}
       %header{:class => "panel-heading"}
         Media Manager
-        %span{:class=>"tools pull-right"}
-          =link_to "", "javascript:;", :class => "fa fa-chevron-down"
-          =link_to "", "javascript:;", :class => "fa fa-cog"
-          =link_to "", "javascript:;", :class => "fa fa-times"
       %div{:class => "panel-body"}
         %ul#filters{:class => "media-filter"}
-          %li 
-            = link_to "All", "#", "data-filter" => "*"
-          %li 
-            = link_to "Images", "#", "data-filter" => ".images"
-          %li 
-            = link_to "Audio", "#", "data-filter" => ".audio"
-          %li 
-            = link_to "Video", "#", "data-filter" => ".video"
-          %li 
-            = link_to "Documents", "#", "data-filter" => ".documents"
-        /%div{:class => "btn-group pull-right"}
-        /  %button{:type => "button", :class => "btn btn-white btn-sm"}
-        /    %i{:class => "fa fa-check-square-o"}
-        /      Select all
-        /  %button#add_new{:type => "button", :class => "btn btn-white btn-sm"}
-        /    %i{:class => "fa fa-folder-open"}
-        /      Add New
-        /  %button{:type => "button", :class => "btn btn-white btn-sm"}
-        /    %i{:class => "fa fa-trash-o"}
-        /      Delete
+          - if entity.attachments.present?
+            = render :partial => '/attachments/tag_list', :locals => {:entity => entity}
+          
         = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", :style => "color: #0033cc;", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @account.id.to_s + ");") do
           %i{:class => "fa fa-upload"}
             Upload New File
@@ -43,4 +22,5 @@
         %div{:class => "col-md-12 text-center clearfix"}
 
         %div#myModal{:class => "modal fade", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-        
+
+= javascript_include_tag 'bucketadmin/js/isotope.init.js'
