@@ -5,9 +5,9 @@
     - tags << tag_name unless tags.include?(tag_name)
     
 %li 
-  = link_to "All", "#", "data-filter" => "*"
+  = link_to "All", "#", "data-filter" => "*", :id => "media_filter_all"
 
 - tags.each do |tag|
   %li
-    = link_to tag, "#", "data-filter" => ".#{tag}"
+    = link_to tag, "#", "data-filter" => ".#{tag}", :id => "media_filter_#{tag}"
 

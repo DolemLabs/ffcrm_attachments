@@ -168,3 +168,12 @@ function deleteFile(attachment_id) {
       $("#close_button").click();
     });
 }
+
+$(document).on("click", "#main-content section div div section header ul li:last", function(event) {
+  onShowAttachments();
+});
+
+function onShowAttachments() {
+  console.log($("#media_filter_all"));
+  $("#media_filter_all").click();
+}
