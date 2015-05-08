@@ -1,3 +1,4 @@
+- @entity = entity
 - collapsed = session[:entity_attachments].nil?
 %br/
 %div{:class => "row"}
@@ -10,7 +11,7 @@
           - if entity.attachments.present?
             = render :partial => '/attachments/tag_list', :locals => {:entity => entity}
           
-        = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", :style => "color: #0033cc;", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @account.id.to_s + ");") do
+        = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", :style => "color: #0033cc;", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @entity.id.to_s + ", '" + @entity.class.name + "');") do
           %i{:class => "fa fa-upload"}
             Upload New File
             

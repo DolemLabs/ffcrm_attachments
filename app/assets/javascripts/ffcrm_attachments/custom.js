@@ -124,8 +124,8 @@ function append_file_input(last_file_input) {
   }
 }
 
-function onPhotoUpload(event) {
-  $('#account_attachments_attributes_0_attachment_file_name').val(event.fpfile.filename);
+function onPhotoUpload(event, entity_type) {
+  $('#' + entity_type + '_attachments_attributes_0_attachment_file_name').val(event.fpfile.filename);
   $('#name').val(event.fpfile.filename);
 }
 
@@ -145,8 +145,8 @@ function loadPopup(attach_id) {
     });
 }
 
-function loadPopupNew(account_id) {
-  url = "/attachments/new?account_id=" + account_id;
+function loadPopupNew(entity_id, entity_type) {
+  url = "/attachments/new?entity_id=" + entity_id + "&entity_type=" + entity_type;
   
   var jqxhr = $.get( url, function(data) {
       // success
@@ -174,6 +174,5 @@ $(document).on("click", "#main-content section div div section header ul li:last
 });
 
 function onShowAttachments() {
-  console.log($("#media_filter_all"));
   $("#media_filter_all").click();
 }

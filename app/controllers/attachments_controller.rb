@@ -19,7 +19,8 @@ class AttachmentsController < ApplicationController
   
   def popup
     @attach = Attachment.find(params[:id])
-    @account = Account.find(@attach.entity_id)
+    klass = @attach.entity_type.constantize
+    @entity = klass.find(@attach.entity_id)
     
     respond_to do |format|
       # format.js {render :partial => "attachment_popup"}
@@ -37,8 +38,13 @@ class AttachmentsController < ApplicationController
   end
   
   def new
+    entity_id = params[:entity_id]
+    entity_type = params[:entity_type]
+    klass = entity_type.constantize
+    
     @attach = Attachment.new
-    @account = Account.find(params[:account_id])
+    # @account = Account.find(params[:account_id])
+    @entity = klass.find(entity_id)
     
     respond_to do |format|
       format.js
@@ -46,16 +52,28 @@ class AttachmentsController < ApplicationController
   end
   
   def update
-    tags = params[:account][:attachments_attributes]['0'][:tag_list]
+    entity_type = params[:entity_type]
+    klass = entity_type.constantize
+    
+    # tags = params[:account][:attachments_attributes]['0'][:tag_list]
+    tags = params[entity_type.downcase][:attachments_attributes]['0'][:tag_list]
     tags.delete('')
     
     if params[:id] == 'create'
-      account_id = params[:account][:attachments_attributes]['0'][:account_id]
-      attach_attributes = params[:account][:attachments_attributes]['0']
-      attach_attributes.delete(:account_id)
+      # account_id = params[:account][:attachments_attributes]['0'][:account_id]
+      # attach_attributes = params[:account][:attachments_attributes]['0']
+      # attach_attributes.delete(:account_id)
       
-      @account = Account.find(account_id)
-      @attach = @account.attachments.new(attach_attributes)
+      # @account = Account.find(account_id)
+      # @attach = @account.attachments.new(attach_attributes)
+      # @attach.save
+      
+      entity_id = params[entity_type.downcase][:attachments_attributes]['0'][:entity_id]
+      attach_attributes = params[entity_type.downcase][:attachments_attributes]['0']
+      attach_attributes.delete(:entity_id)
+      
+      @entity = klass.find(entity_id)
+      @attach = @entity.attachments.new(attach_attributes)
       @attach.save
     else
       @attach = Attachment.find(params[:id])

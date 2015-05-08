@@ -6,8 +6,8 @@
       %h4{:class => "modal-title"}
         Edit Media Gallery
     %div{:class => "modal-body row"}
-      = simple_form_for(@account, :url => {:controller => :attachments, :action => 'update'}, :html => one_submit_only, :remote => true) do |f|
-        = f.simple_fields_for :attachments, @account.attachments.where("id = ?", @attach.id).first do |t|
+      = simple_form_for(@entity, :url => {:controller => :attachments, :action => 'update'}, :html => one_submit_only, :remote => true) do |f|
+        = f.simple_fields_for :attachments, @entity.attachments.where("id = ?", @attach.id).first do |t|
           %div{:class => "col-md-5 img-modal"}
             = attachment_preview(@attach)
           %div{:class => "col-md-7"}
@@ -15,6 +15,7 @@
               %label
                 Name
               = t.text_field :name, {:value => file_name(@attach), :disabled => 'true'}
+              = hidden_field_tag :entity_type, @entity.class.name
             %div{:class => "form-group"}
               = render :partial => "/attachments/tags", :locals => {:f => t, :span => 3}
             %div{:class => "pull-right"}
