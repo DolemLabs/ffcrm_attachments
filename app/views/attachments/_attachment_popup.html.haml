@@ -19,6 +19,9 @@
             %div{:class => "form-group"}
               = render :partial => "/attachments/tags", :locals => {:f => t, :span => 3}
             %div{:class => "pull-right"}
+              /%button{:class => "btn btn-success", :type => "button", :onclick => "downloadFile(" + @attach.id.to_s + ")"}
+              /  Download
+              = link_to 'Download', download_attachment_path(@attach), :class => "btn btn-success", :type => "button"
               %button{:class => "btn btn-danger", :type => "button", :onclick => "deleteFile(" + @attach.id.to_s + ")"}
                 Delete
               %button{:class => "btn btn-primary", :type => "submit"}
