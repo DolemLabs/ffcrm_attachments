@@ -86,4 +86,13 @@ class AttachmentsController < ApplicationController
     end
   end
   
+  def preview
+    @attach = Attachment.find(params[:id])
+    @url = "http://#{Setting.host}#{@attach.attachment.url(:original)}"
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
 end

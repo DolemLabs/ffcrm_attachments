@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get :download
       put :remove
       post :popup
+      post :preview
     end
   end
 end

@@ -176,3 +176,15 @@ $(document).on("click", "#main-content section div div section header ul li:last
 function onShowAttachments() {
   $("#media_filter_all").click();
 }
+
+function showPreview(attachment_id) {
+  url = "/attachments/" + attachment_id + "/preview";
+  data = { id: attachment_id };
+  
+  var jqxhr = $.post( url, function(data) {
+      // success
+      $("#myPreview").html(data.responseText);
+    });
+}
+
+
