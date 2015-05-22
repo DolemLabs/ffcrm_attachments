@@ -22,4 +22,4 @@ group :development do
   gem 'debugger', platform: 'ruby_19'
 end
 
-gem 'filepicker-rails'
+# gem 'filepicker-rails'

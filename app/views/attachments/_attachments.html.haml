@@ -1,14 +1,28 @@
+- @entity = entity
 - collapsed = session[:entity_attachments].nil?
 %br/
-#attachments
-  = subtitle :entity_attachments, collapsed, t(:extra_doc) + " (#{entity.attachments.count})"
-  .attachments
-    #entity_attachments{ hidden_if(collapsed) }
-      %table
-        %tr
-          %td
-            - if entity.attachments.present?
-              - entity.attachments.each do |attach|
-                .attach_block
-                  = link_to attachment_preview(attach), download_attachment_path(attach), {title: attach.attachment_file_name}
-                  .file_name= file_name(attach)
+%div{:class => "row"}
+  %div{:class => "col-sm-12"}
+    %section{:class => "panel"}
+      %header{:class => "panel-heading"}
+        Media Manager
+      %div{:class => "panel-body"}
+        %ul#filters{:class => "media-filter"}
+          - if entity.attachments.present?
+            = render :partial => '/attachments/tag_list', :locals => {:entity => entity}
+          
+        = link_to("#myModal", :type => "button", :class => "btn pull-right btn-sm", :style => "color: #0033cc;", "data-toggle" => "modal", :onclick => "loadPopupNew(" + @entity.id.to_s + ", '" + @entity.class.name + "');") do
+          %i{:class => "fa fa-upload"}
+            Upload New File
+            
+        %div#gallery{:class => "media-gal"}
+          - if entity.attachments.present?
+            - entity.attachments.each do |attach|
+              = render :partial => '/attachments/attachment', :locals => {:attach => attach}
+                  
+        %div{:class => "col-md-12 text-center clearfix"}
+
+        %div#myModal{:class => "modal fade", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+        /%div#myPreview{:class => "modal fade", :tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true", :style => "max-width:600px;"}
+        
+= javascript_include_tag 'bucketadmin/js/isotope.init.js'

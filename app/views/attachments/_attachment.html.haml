@@ -1,0 +1,6 @@
+- tag_list = attach.tag_list.map{|value| value.gsub(' ', '_')}.join(' ')
+- classes = "#{tag_list} item isotope-item"
+%div{:class => classes, :id => "attachment_#{attach.id}"}
+  = link_to(attachment_preview(attach), "#myModal", "data-toggle" => "modal", :onclick => "loadPopup(" + attach.id.to_s + ");")
+  %p
+    = file_name(attach)

@@ -1,0 +1,13 @@
+- tags = []
+- entity.attachments.each do |attach|
+  - attach.tags.each do |tag|
+    - tag_name = tag.name.gsub(' ', '_')
+    - tags << tag_name unless tags.include?(tag_name)
+    
+%li 
+  = link_to "All", "#", "data-filter" => "*", :id => "media_filter_all"
+
+- tags.each do |tag|
+  %li
+    = link_to tag, "#", "data-filter" => ".#{tag}", :id => "media_filter_#{tag}"
+

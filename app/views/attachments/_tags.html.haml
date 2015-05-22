@@ -6,5 +6,5 @@
   { value: f.object.tags.map{|t| t.name } },
   { :multiple => true, :class => 'select2',
     'data-placeholder' => t(:select_or_create_tags),
-    'data-url' => url_for(action: 'field_group'),
+    'data-url' => url_for(controller: :accounts, action: 'field_group'),
     'data-asset-id' => f.object.try(:id) }
