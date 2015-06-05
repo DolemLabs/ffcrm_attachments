@@ -1,4 +1,7 @@
 $('#close_button').click();
 
-- if @account
-  $('#gallery').append('#{ j render(:partial => "attachment", :locals => {:attach => @attach}) }');
+/- if @account
+$('#gallery').append('#{ j render(:partial => "attachment1", :locals => {:attach => @attach}) }');
+if ($('#gallery').css('height') == "0px") {
+$('#gallery').css('height', '300')
+}
