@@ -1,9 +1,9 @@
-%div{:class => "modal-dialog", :style => "width:600px;"}
-  %div{:class => "modal-content", :style => "height:600px; width:600px; max-width:600px;"}
+%div{:class => "modal-dialog", :style => "width:99%; height:95%;"}
+  %div{:class => "modal-content", :style => "height:95%; width:99%; padding:0px;margin:0px;"}
     %div{:class => "modal-header"}
       %button#close_button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-hidden" => "true"}
         &times;
       %h4{:class => "modal-title"}
         = "Preview of #{file_name(@attach)}"
-    %div{:class => "modal-body row", :style => "height:90%; width:600px;"}
-      <iframe allowFullscreen="true" width="100%" height="100%" frameborder="0" allowtransparency="true" src="//api.accusoft.com/v1/viewer/?document=#{@url}&1&key=eZkQPLgOpOZxIcXYCebbf4Sz--P9W9IIctTFBRdnASnXRxiRqlXZnXTodyQToZWB&viewertype=html5&viewerheight=&viewerwidth=100%&upperToolbarColor=797c7c&lowerToolbarColor=000000&bottomToolbarColor=000000&backgroundColor=757a7a&fontColor=ffffff&buttonColor=white&hidden="></iframe>
+    %div{:class => "modal-body row", :style => "height:95%;"}
+      <iframe allowFullscreen="true" width="100%" height="95%" frameborder="0" allowtransparency="true" src="//api.accusoft.com/v1/viewer/?document=#{@url}&1&key=eZkQPLgOpOZxIcXYCebbf4Sz--P9W9IIctTFBRdnASnXRxiRqlXZnXTodyQToZWB&viewertype=html5&viewerheight=&viewerwidth=100%&upperToolbarColor=797c7c&lowerToolbarColor=000000&bottomToolbarColor=000000&backgroundColor=757a7a&fontColor=ffffff&buttonColor=white&hidden="></iframe>
