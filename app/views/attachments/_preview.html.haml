@@ -6,4 +6,5 @@
       %h4{:class => "modal-title"}
         = "Preview of #{file_name(@attach)}"
     %div{:class => "modal-body row", :style => "height:95%;"}
-      <iframe allowFullscreen="true" width="100%" height="95%" frameborder="0" allowtransparency="true" src="//api.accusoft.com/v1/viewer/?document=#{@url}&1&key=eZkQPLgOpOZxIcXYCebbf4Sz--P9W9IIctTFBRdnASnXRxiRqlXZnXTodyQToZWB&viewertype=html5&viewerheight=&viewerwidth=100%&upperToolbarColor=797c7c&lowerToolbarColor=000000&bottomToolbarColor=000000&backgroundColor=757a7a&fontColor=ffffff&buttonColor=white&hidden="></iframe>
+      <iframe id="preview_iframe" allowFullscreen="true" width="100%" height="95%" frameborder="0" allowtransparency="true" src="//api.accusoft.com/v1/viewer/?document=#{@url}&1&key=eZkQPLgOpOZxIcXYCebbf4Sz--P9W9IIctTFBRdnASnXRxiRqlXZnXTodyQToZWB&viewertype=html5&viewerheight=&viewerwidth=100%&upperToolbarColor=797c7c&lowerToolbarColor=000000&bottomToolbarColor=000000&backgroundColor=757a7a&fontColor=ffffff&buttonColor=white&hidden="></iframe>
+      = image_tag "spinner.gif", :id => "iframe-spinner", :style => "position:absolute;left:0px;top:0px;padding-left:30.6%;padding-top:5%;"
