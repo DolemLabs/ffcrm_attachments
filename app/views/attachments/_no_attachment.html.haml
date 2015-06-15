@@ -1,0 +1,8 @@
+- tag_list = String.new
+- classes = "#{tag_list} item isotope-item"
+- class_name = entity.class.name
+- class_name = 'Activity' if class_name == 'Opportunity'
+
+%div{:class => classes, :id => "no_attachment", :style => "height: 50px; width: auto; border:0;"}
+  %p
+    = "There are no documents asociated to this #{class_name}"
