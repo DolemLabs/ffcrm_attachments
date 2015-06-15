@@ -1,0 +1,2 @@
+- if @entity.attachments.empty? || @entity.attachments.nil?
+  $('#gallery').html('#{ j render(:partial => "no_attachment", :locals => {:entity => @entity}) }');

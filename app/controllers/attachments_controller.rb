@@ -13,8 +13,14 @@ class AttachmentsController < ApplicationController
 
   def remove
     attach = Attachment.find(params[:id])
+    klass = attach.entity_type.constantize
+    @entity = klass.find(attach.entity_id)
+    
     attach.destroy
-    render json: { status: true }
+    
+    respond_to do |format|
+      format.js
+    end
   end
   
   def popup

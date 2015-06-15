@@ -2,6 +2,10 @@ $('#close_button').click();
 
 /- if @account
 $('#gallery').append('#{ j render(:partial => "attachment1", :locals => {:attach => @attach}) }');
-if ($('#gallery').css('height') == "0px") {
-$('#gallery').css('height', '300')
+if ($('#gallery').height() < 300) {
+$('#gallery').css('height', '300');
+}
+
+if ($('#no_attachment').css('display') == 'block'){
+$('#no_attachment').css('display', 'none');
 }
