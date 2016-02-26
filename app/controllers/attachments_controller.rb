@@ -16,6 +16,7 @@ class AttachmentsController < ApplicationController
     klass = attach.entity_type.constantize
     @entity = klass.find(attach.entity_id)
     
+    TagList.remove_from(attach)
     attach.destroy
     
     respond_to do |format|
